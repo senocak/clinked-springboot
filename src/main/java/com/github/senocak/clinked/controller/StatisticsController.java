@@ -26,28 +26,24 @@ public class StatisticsController {
 
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Map> statistics() {
+    public ResponseEntity<Map<String, Integer>> statistics() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -7);
         Date sevenDaysBefore = calendar.getTime();
 
-        List<Article> byCreatedAtBetween = articleService.findArticlesByCreatedAtIsBetween(sevenDaysBefore);
-
-        Map<Object, List<Article>> arListMap =
-                byCreatedAtBetween.stream()
+        Map<Object, List<Article>> objectListMap =
+                articleService.findArticlesByCreatedAtIsBetween(sevenDaysBefore).stream()
                         .collect(Collectors.groupingBy(article -> {
                             Calendar cal = Calendar.getInstance();
                             cal.setTime(article.getCreatedAt());
-                            return cal.get(Calendar.DAY_OF_MONTH)+"/"+
-                                    cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.YEAR);
-
+                            return cal.get(Calendar.DAY_OF_MONTH)+"/"+ cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.YEAR);
                         }));
 
-        Map<String, Integer> arListMap2 = new HashMap<>();
-        for (Map.Entry<Object, List<Article>> entry: arListMap.entrySet()) {
-            arListMap2.put(entry.getKey().toString(), entry.getValue().size());
+        Map<String, Integer> map = new HashMap<>();
+        for (Map.Entry<Object, List<Article>> entry: objectListMap.entrySet()) {
+            map.put(entry.getKey().toString(), entry.getValue().size());
         }
 
-        return ResponseEntity.ok(arListMap2);
+        return ResponseEntity.ok(map);
     }
 }
