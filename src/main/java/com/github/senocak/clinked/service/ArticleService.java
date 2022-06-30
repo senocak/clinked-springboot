@@ -11,6 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
@@ -40,5 +43,9 @@ public class ArticleService {
 
     public void delete(Article article) {
         articleRepository.delete(article);
+    }
+
+    public List<Article> findArticlesByCreatedAtIsBetween(Date sevenDaysBeforeString) {
+        return articleRepository.findAllWithDateAfter(sevenDaysBeforeString);
     }
 }
