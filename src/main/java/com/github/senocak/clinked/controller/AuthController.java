@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping(AuthController.URL)
 public class AuthController {
-    public static final String URL = "/api/v1/auth";
+    public static final String URL = "/api/v1/3";
     private final UserService userService;
     private final JwtTokenProvider tokenProvider;
     private final AuthenticationManager authenticationManager;
