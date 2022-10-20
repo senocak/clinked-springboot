@@ -19,6 +19,7 @@ import java.util.UUID;
 @Slf4j
 @SpringBootApplication
 @RequiredArgsConstructor
+// changed
 public class ArticleApplication implements CommandLineRunner {
 	private final RoleRepository roleRepository;
 	private final UserRepository userRepository;
