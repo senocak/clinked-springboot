@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(UserController.URL)
+// updated controller
 public class UserController {
     public static final String URL = "/api/v1/user";
     private final UserService userService;
