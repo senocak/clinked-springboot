@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(AuthController.URL)
+// updated
 public class AuthController {
     public static final String URL = "/api/v1/auth";
     private final UserService userService;
